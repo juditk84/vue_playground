@@ -9,6 +9,7 @@
         weirdArray: [1, 2, 3, 4, 5, 6, 7, 8, 9],
         passAsProp: "a text",
         fact: "waiting for a fact.",
+        pokemon: "fetch pokemons.",
       }
     },
     components:{
@@ -43,6 +44,21 @@
           console.error(err);
         });
     },
+    fetchPokemon() {
+      fetch('./json/pokemon.js', {
+        method: "GET",
+      })
+        .then((response) => {
+          console.log(response)
+          response.json().then((data) => {
+            this.pokemon = data;
+            console.log(data)
+          });
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
     },
   }
   
@@ -56,8 +72,10 @@
   <button class="button" @click="() => increase()">Increase the count</button>
   <button class="button" @click="() => clear()">Clear</button>
   <button class="button" @click="() => fetchData()">fetch a fact</button>
+  <button class="button" @click="() => fetchPokemon()">fetch a pocket monster</button>
   <p>Count is: {{ count }}</p>
   <div>{{ fact }}</div>
+  <div>{{ pokemon }}</div>
   <router-view></router-view>
 
 </template>
