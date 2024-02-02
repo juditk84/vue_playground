@@ -94,19 +94,22 @@ function fetchExercicis(){
 
   <NavBarrio />
 
-  <button class="button" @click="() => increase()">Increase the count</button>
-  <button class="button" @click="() => clearCount()">Clear</button>
-  <button class="button" @click="() => reverseString()">Reverse the string.</button>
-  <button class="button" @click="() => fetchExercicis()">fetch all exercicis</button>
-  <button class="button" @click="() => switchToRed()">change the color of the text to {{ isRed ? "white" : "red" }}.</button>
-  <p>Count is: {{ count }}</p>
-  <p>a <b>BOLD</b> statement: {{ aStringToMessWith }}</p>
-  <div>{{ exercicis ? exercicis : "fetch them."}}</div>
+  <div class="test_app_body">
+    <button class="button" @click="() => increase()">Increase the count</button>
+    <button class="button" @click="() => clearCount()">Clear</button>
+    <button class="button" @click="() => reverseString()">Reverse the string.</button>
+    <button class="button" @click="() => fetchExercicis()">fetch all exercicis</button>
+    <button class="button" @click="() => switchToRed()">change the color of the text to {{ isRed ? "white" : "red" }}.</button>
+    <p>Count is: {{ count }}</p>
+    <p>a <b>BOLD</b> statement: {{ aStringToMessWith }}</p>
+    <div>{{ exercicis ? exercicis : "fetch them."}}</div>
 
-  <p :class="{ red: isRed }">a text to switch the color of.</p>
-  <!-- <ul>
-    <li v-for="exercici in exercicis">{{ exercici.tipus}}</li>
-  </ul> -->
+    <p :class="{ red: isRed }">a text to switch the color of.</p>
+    <!-- <ul>
+      <li v-for="exercici in exercicis">{{ exercici.tipus}}</li>
+    </ul> -->
+  </div>
+  
   <router-view></router-view>
 
 </template>
@@ -115,6 +118,9 @@ function fetchExercicis(){
 
 <style scoped>
 
+.test_app_body{
+  margin-top: 25vh;
+}
 .red{
   color: red;
 }
