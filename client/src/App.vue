@@ -50,12 +50,13 @@
 
 <script setup>
 import NavBarrio from './components/NavBarrio.vue'
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
 const count = ref(20)
 const aStringToMessWith = ref("we're here, we're queer, visca el Frankfurt Vallès.")
 const exercicis = ref([])
 const isRed = ref(false)
+const isMounted = ref(false)
 
 function increase(){
   count.value++
@@ -73,20 +74,26 @@ function switchToRed(){
   isRed.value = !isRed.value
 }
 
-
 function fetchExercicis(){
   fetch("/api/exercicis", {
           method: "GET",
         })
         .then((response) => {
             response.json().then((data) => {
-            this.exercicis.value = data;
-            console.log(data)});
+            exercicis.value = data;
+            });
         })
         .catch((err) => {
             console.error(err);
           });
       }
+
+onMounted(() => {
+
+  fetchExercicis();
+  isMounted.value = true
+  console.log("useEffect equivalent loaded.")
+})
 
 </script>
 
@@ -102,12 +109,11 @@ function fetchExercicis(){
     <button class="button" @click="() => switchToRed()">change the color of the text to {{ isRed ? "white" : "red" }}.</button>
     <p>Count is: {{ count }}</p>
     <p>a <b>BOLD</b> statement: {{ aStringToMessWith }}</p>
-    <div>{{ exercicis ? exercicis : "fetch them."}}</div>
 
     <p :class="{ red: isRed }">a text to switch the color of.</p>
-    <!-- <ul>
-      <li v-for="exercici in exercicis">{{ exercici.tipus}}</li>
-    </ul> -->
+    <ul>
+      <li v-for="(exercici, index) in exercicis">{{ exercici.tipus}}</li>
+    </ul>
   </div>
   
   <router-view></router-view>
