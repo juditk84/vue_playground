@@ -1,53 +1,3 @@
-<!-- <script >
-
-  import NavBarrio from './components/NavBarrio.vue'
-
-  export default{
-    data(){
-      return{
-        count: 20,
-        weirdArray: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-        passAsProp: "a text",
-        fact: "waiting for a fact.",
-        exercicis: "",
-      }
-    },
-    components:{
-
-        NavBarrio,
-
-    },
-    methods:{
-      increase(){
-        this.count++;
-        console.log(this.count)
-      },
-      clear(){
-        this.count = 0;
-        console.log("count cleared.")
-      },
-      fetchExercises(){
-        fetch("/api/exercicis", {
-          method: "GET",
-        })
-        .then((response) => {
-            response.json().then((data) => {
-            this.exercicis = data;
-            console.log(data)});
-        })
-        .catch((err) => {
-            console.error(err);
-          });
-      },
-      mounted(){
-        console.log("logging on mount.")
-        this.fetchExercises();
-      }
-    },
-  }
-
-</script> -->
-
 <script setup>
 import NavBarrio from './components/NavBarrio.vue'
 import { ref, onMounted } from 'vue';
@@ -105,17 +55,16 @@ onMounted(() => {
     <button class="button" @click="() => increase()">Increase the count</button>
     <button class="button" @click="() => clearCount()">Clear</button>
     <button class="button" @click="() => reverseString()">Reverse the string.</button>
-    <button class="button" @click="() => fetchExercicis()">fetch all exercicis</button>
     <button class="button" @click="() => switchToRed()">change the color of the text to {{ isRed ? "white" : "red" }}.</button>
     <p>Count is: {{ count }}</p>
     <p>a <b>BOLD</b> statement: {{ aStringToMessWith }}</p>
 
     <p :class="{ red: isRed }">a text to switch the color of.</p>
-    <ul>
-      <li v-for="(exercici, index) in exercicis">{{ exercici.tipus}}</li>
-    </ul>
+    <div class="grid_list">
+      <div class="card" v-for="(exercici, index) in exercicis">Ex. nº: {{ exercici.id }} <br> {{ exercici.tipus }} <br> {{ exercici.especie }}</div>
+    </div>
   </div>
-  
+
   <router-view></router-view>
 
 </template>
@@ -124,6 +73,25 @@ onMounted(() => {
 
 <style scoped>
 
+.grid_list{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+.card {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 10px 10px 10px 0 rgba(0, 0, 0, 0.954);
+  transition: 0.3s;
+  background-color: antiquewhite;
+  color: black;
+  text-align: center;
+  border-radius: 15px;
+}
+
+.card:hover {
+  background-color: rgb(166, 4, 4);
+}
 .test_app_body{
   margin-top: 25vh;
 }
