@@ -101,7 +101,7 @@ function fetchExercicis(){
   <button class="button" @click="() => switchToRed()">change the color of the text to {{ isRed ? "white" : "red" }}.</button>
   <p>Count is: {{ count }}</p>
   <p>a <b>BOLD</b> statement: {{ aStringToMessWith }}</p>
-  <div>{{ exercicis }}</div>
+  <div>{{ exercicis ? exercicis : "fetch them."}}</div>
 
   <p :class="{ red: isRed }">a text to switch the color of.</p>
   <!-- <ul>
