@@ -2,9 +2,9 @@ import './assets/main.css'
 
 import { createPinia } from 'pinia'
 
-// import Vue, { createApp } from '@vue/compat';
+import Vue, { createApp } from '@vue/compat';
 
-import Vue, { createApp } from 'vue';
+// import Vue, { createApp } from 'vue';
 import BootstrapVue from 'bootstrap-vue';
 import HelloBootstrap from './components/HelloBootstrap.vue';
 import 'bootstrap/dist/css/bootstrap.css';
