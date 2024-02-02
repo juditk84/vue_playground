@@ -1,4 +1,4 @@
-<script>
+<!-- <script >
 
   import NavBarrio from './components/NavBarrio.vue'
 
@@ -9,7 +9,7 @@
         weirdArray: [1, 2, 3, 4, 5, 6, 7, 8, 9],
         passAsProp: "a text",
         fact: "waiting for a fact.",
-        pokemon: "fetch pokemons.",
+        exercicis: "",
       }
     },
     components:{
@@ -26,56 +26,56 @@
         this.count = 0;
         console.log("count cleared.")
       },
-      fetchData() {
-      fetch('https://facts-by-api-ninjas.p.rapidapi.com/v1/facts', {
-        method: "GET",
-        headers: {
-          "X-RapidAPI-Key": 'sBDTDfFXcsgZYNzX7ZqILw==AWVbTS3u6LAk1UPl',
-          "X-RapidAPI-Host": 'facts-by-api-ninjas.p.rapidapi.com',
-        },
-      })
+      fetchExercises(){
+        fetch("/api/exercicis", {
+          method: "GET",
+        })
         .then((response) => {
-          response.json().then((data) => {
-            this.fact = data;
-            console.log(data)
-          });
+            response.json().then((data) => {
+            this.exercicis = data;
+            console.log(data)});
         })
         .catch((err) => {
-          console.error(err);
-        });
-    },
-    fetchPokemon() {
-      fetch('./json/pokemon.js', {
-        method: "GET",
-      })
-        .then((response) => {
-          console.log(response)
-          response.json().then((data) => {
-            this.pokemon = data;
-            console.log(data)
+            console.error(err);
           });
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    },
+      },
+      mounted(){
+        console.log("logging on mount.")
+        this.fetchExercises();
+      }
     },
   }
-  
-</script>
 
+</script> -->
+
+<script setup>
+import NavBarrio from './components/NavBarrio.vue'
+import { ref } from 'vue';
+
+const count = ref(20)
+
+function increase(){
+  count.value++
+}
+
+function clearCount(){
+  count.value = 0;
+}
+
+</script>
 
 <template>
 
   <NavBarrio />
 
   <button class="button" @click="() => increase()">Increase the count</button>
-  <button class="button" @click="() => clear()">Clear</button>
-  <button class="button" @click="() => fetchData()">fetch a fact</button>
-  <button class="button" @click="() => fetchPokemon()">fetch a pocket monster</button>
+  <button class="button" @click="() => clearCount()">Clear</button>
+  <button class="button" @click="() => fetchExercises()">fetch all exercicis</button>
   <p>Count is: {{ count }}</p>
-  <div>{{ fact }}</div>
-  <div>{{ pokemon }}</div>
+  <!-- <div>{{ exercicis }}</div> -->
+  <!-- <ul>
+    <li v-for="exercici in exercicis">{{ exercici.tipus}}</li>
+  </ul> -->
   <router-view></router-view>
 
 </template>

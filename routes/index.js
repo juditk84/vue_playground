@@ -4,7 +4,7 @@ const db = require("../model/helper");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.send({ title: 'Express' });
+  res.send({ title: 'Life m8' });
 });
 
 router.get('/exercicis/', function(req, res, next) { 
