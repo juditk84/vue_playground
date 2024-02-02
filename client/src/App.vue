@@ -53,6 +53,8 @@ import NavBarrio from './components/NavBarrio.vue'
 import { ref } from 'vue';
 
 const count = ref(20)
+const aStringToMessWith = ref("we're here, we're queer, visca el Frankfurt Vallès.")
+
 
 function increase(){
   count.value++
@@ -60,6 +62,10 @@ function increase(){
 
 function clearCount(){
   count.value = 0;
+}
+
+function reverseString(){
+  aStringToMessWith.value = aStringToMessWith.value.split("").reverse().join("")
 }
 
 </script>
@@ -70,8 +76,10 @@ function clearCount(){
 
   <button class="button" @click="() => increase()">Increase the count</button>
   <button class="button" @click="() => clearCount()">Clear</button>
+  <button class="button" @click="() => reverseString()">Reverse the string.</button>
   <button class="button" @click="() => fetchExercises()">fetch all exercicis</button>
   <p>Count is: {{ count }}</p>
+  <p>a <b>BOLD</b> statement: {{ aStringToMessWith }}</p>
   <!-- <div>{{ exercicis }}</div> -->
   <!-- <ul>
     <li v-for="exercici in exercicis">{{ exercici.tipus}}</li>
