@@ -54,7 +54,8 @@ import { ref } from 'vue';
 
 const count = ref(20)
 const aStringToMessWith = ref("we're here, we're queer, visca el Frankfurt Vallès.")
-
+const exercicis = ref([])
+const isRed = ref(false)
 
 function increase(){
   count.value++
@@ -68,6 +69,25 @@ function reverseString(){
   aStringToMessWith.value = aStringToMessWith.value.split("").reverse().join("")
 }
 
+function switchToRed(){
+  isRed.value = !isRed.value
+}
+
+
+function fetchExercicis(){
+  fetch("/api/exercicis", {
+          method: "GET",
+        })
+        .then((response) => {
+            response.json().then((data) => {
+            this.exercicis.value = data;
+            console.log(data)});
+        })
+        .catch((err) => {
+            console.error(err);
+          });
+      }
+
 </script>
 
 <template>
@@ -77,10 +97,13 @@ function reverseString(){
   <button class="button" @click="() => increase()">Increase the count</button>
   <button class="button" @click="() => clearCount()">Clear</button>
   <button class="button" @click="() => reverseString()">Reverse the string.</button>
-  <button class="button" @click="() => fetchExercises()">fetch all exercicis</button>
+  <button class="button" @click="() => fetchExercicis()">fetch all exercicis</button>
+  <button class="button" @click="() => switchToRed()">change the color of the text to {{ isRed ? "white" : "red" }}.</button>
   <p>Count is: {{ count }}</p>
   <p>a <b>BOLD</b> statement: {{ aStringToMessWith }}</p>
-  <!-- <div>{{ exercicis }}</div> -->
+  <div>{{ exercicis }}</div>
+
+  <p :class="{ red: isRed }">a text to switch the color of.</p>
   <!-- <ul>
     <li v-for="exercici in exercicis">{{ exercici.tipus}}</li>
   </ul> -->
@@ -91,6 +114,10 @@ function reverseString(){
 
 
 <style scoped>
+
+.red{
+  color: red;
+}
 header {
   line-height: 1.5;
   max-height: 100vh;
