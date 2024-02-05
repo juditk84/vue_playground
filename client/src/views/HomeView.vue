@@ -48,16 +48,24 @@ onMounted(() => {
 <template>
   <main>
     <div class="test_app_body">
-    <button class="button" @click="() => increase()">Increase the count</button>
-    <button class="button" @click="() => clearCount()">Clear</button>
-    <button class="button" @click="() => reverseString()">Reverse the string.</button>
-    <button class="button" @click="() => switchToRed()">change the color of the text to {{ isRed ? "white" : "red" }}.</button>
+    <v-btn @click="() => increase()">Increase the count</v-btn>
+
+    <v-btn class="button" @click="() => clearCount()">Clear</v-btn>
+    <v-btn class="button" @click="() => reverseString()">Reverse the string.</v-btn>
+    <v-btn class="button" :style='{backgroundColor: isRed ? "white" : "red"}' @click="() => switchToRed()">change the color of the text to {{ isRed ? "white" : "red" }}.</v-btn>
     <p>Count is: {{ count }}</p>
     <p>a <b>BOLD</b> statement: {{ aStringToMessWith }}</p>
 
     <p :class="{ red: isRed }">a text to switch the color of.</p>
     <div class="grid_list">
-      <div class="card" v-for="(exercici, index) in exercicis">Ex. nº: {{ exercici.id }} <br> {{ exercici.tipus }} <br> {{ exercici.especie }}</div>
+      <v-card variant="elevated" color="indigo" elevation="16" hover v-for="(exercici, index) in exercicis">
+        
+        <v-card-title>{{ exercici.id }}</v-card-title>
+        <v-card-subtitle>Tipus d'exercici: {{ exercici.tipus }}</v-card-subtitle>
+        <v-card-subtitle>Espècie: {{ exercici.especie }}</v-card-subtitle>
+        
+      </v-card>
+
     </div>
   </div>
   </main>
