@@ -4,6 +4,7 @@ import { ref, onMounted } from 'vue';
 const count = ref(20)
 const aStringToMessWith = ref("we're here, we're queer, visca el Frankfurt Vallès.")
 const exercicis = ref([])
+const gridCols = ref([])
 const isRed = ref(false)
 const isMounted = ref(false)
 
@@ -30,6 +31,19 @@ function fetchExercicis(){
         .then((response) => {
             response.json().then((data) => {
             exercicis.value = data;
+            
+            exercicis.value.map(exercici => 
+            
+            {
+
+              for (const subThing in exercici){
+                !gridCols.value.includes(subThing) && gridCols.value.push(subThing)
+              }
+            
+            })
+
+            console.log(gridCols.value)
+            
             });
         })
         .catch((err) => {
@@ -41,8 +55,9 @@ onMounted(() => {
 
   fetchExercicis();
   isMounted.value = true
-  console.log("useEffect equivalent loaded.")
+
 })
+
 </script>
 
 <template>
