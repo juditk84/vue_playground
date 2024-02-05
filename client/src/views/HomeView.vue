@@ -1,5 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
+import TestGrid from '../components/TestGrid.vue'
+
 
 const count = ref(20)
 const aStringToMessWith = ref("we're here, we're queer, visca el Frankfurt Vallès.")
@@ -73,16 +75,22 @@ onMounted(() => {
 
     <p :class="{ red: isRed }">a text to switch the color of.</p>
     <div class="grid_list">
-      <v-card variant="elevated" color="indigo" elevation="16" hover v-for="(exercici, index) in exercicis">
+      <!-- <v-card variant="elevated" color="indigo" elevation="16" hover v-for="(exercici, index) in exercicis">
         
         <v-card-title>{{ exercici.id }}</v-card-title>
         <v-card-subtitle>Tipus d'exercici: {{ exercici.tipus }}</v-card-subtitle>
         <v-card-subtitle>Espècie: {{ exercici.especie }}</v-card-subtitle>
         
-      </v-card>
+      </v-card> -->
 
     </div>
   </div>
+
+  <TestGrid
+    :data="exercicis"
+    :columns="gridCols">
+  </TestGrid>
+
   </main>
 </template>
 
